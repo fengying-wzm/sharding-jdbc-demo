@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--
+        这个文件有两个地方需要注意下：
+           I）：targetProject 如果是eclipse插件则只需要配置工程名 work，但用maven插件则不行必须用绝对路径:/work/src/main/java，
+                否则会提醒 The specified target project directory pluto-is-server does not exist
+           II）：如果生成的文件乱码或者GBK时，则只需要加 <property name="javaFileEncoding" value="UTF-8"/>
+    -->
+
+    <!-- 引入配置文件 -->
+    <!-- <properties resource="init.properties" /> -->
+
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="/Users/wuzhimin/maven/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar" />
+
+    <!-- 一个数据库一个context -->
+    <context id="testdb">
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 抑制警告 -->
+            <property name="suppressTypeWarnings" value="true" />
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true" />
+            <!-- 是否生成注释代时间戳 -->
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/gpo" userId="gpo" password="123456" />
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.wuzhimin.shardingjdbcdemo.entity"
+                            targetProject="src/main/java">
+            <!-- 是否在当前路径下新加一层-->
+            <property name="enableSubPackages" value="false" />
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="com.wuzhimin.shardingjdbcdemo.dao"
+                         targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="com.wuzhimin.shardingjdbcdemo.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <!-- 是否在当前路径下新加一层-->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <table tableName="user"
+               domainObjectName="User" enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+        </table>
+
+
+    </context>
+</generatorConfiguration>
