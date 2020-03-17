@@ -64,6 +64,12 @@
                enableUpdateByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
         </table>
+        <table tableName="t_order"
+               domainObjectName="Order" enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" />
+        </table>
 
 
     </context>

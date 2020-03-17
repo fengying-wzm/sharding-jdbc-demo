@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping(value = "/user/{id}")
     @ResponseBody
-    public Object getName(){
+    public Object getName() throws Exception {
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
         map.put("msg",userService.getUser().getName());
